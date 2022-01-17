@@ -2,6 +2,14 @@
 {
     public class Book
     {
+        public Book()
+        {
+            Title = String.Empty;
+            Description = String.Empty;
+            Genre = String.Empty;
+            Author = String.Empty;
+            CoverUrl = String.Empty;
+        }
         public int Id { get; set; }
         public  string Title { get; set; }
         public string Description { get; set; }
