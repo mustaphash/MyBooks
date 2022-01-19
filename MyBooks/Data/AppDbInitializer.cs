@@ -20,7 +20,6 @@ namespace MyBooks.Data
                         DateRead = DateTime.Now.AddDays(-10),
                         Rate = 5,
                         Genre = "Action",
-                        Author = "Mustafa Shakir",
                         CoverUrl = "https//...",
                         DateAdded = DateTime.Now
                     }, new Book()
@@ -29,7 +28,6 @@ namespace MyBooks.Data
                         Description = "Second Book Description",
                         IsRead = false,
                         Genre = "Action",
-                        Author = "Mustafa Shakir",
                         CoverUrl = "https//...",
                         DateAdded = DateTime.Now
                     });

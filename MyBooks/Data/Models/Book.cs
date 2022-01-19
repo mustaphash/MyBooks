@@ -7,7 +7,6 @@
             Title = String.Empty;
             Description = String.Empty;
             Genre = String.Empty;
-            Author = String.Empty;
             CoverUrl = String.Empty;
         }
         public int Id { get; set; }
@@ -17,7 +16,6 @@
         public DateTime? DateRead { get; set; }
         public int? Rate { get; set; }
         public string Genre { get; set; }
-        public string Author { get; set; }
         public string CoverUrl { get; set; }
         public DateTime DateAdded { get; set; }
         //Navigation Properties
