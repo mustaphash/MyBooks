@@ -29,12 +29,12 @@ namespace MyBooks.Data.Services
 
             foreach (var id in book.AuthorIds)
             {
-                var _book_author = new Book_Author()
+                var book_author = new Book_Author()
                 {
                     BookId = _book.Id,
                     AuthorId = id
                 };
-                _context.Books_Authors.Add(_book_author);
+                _context.Books_Authors.Add(book_author);
                 _context.SaveChanges();
             }
         }
@@ -42,7 +42,7 @@ namespace MyBooks.Data.Services
         public List<Book> GetAllBooks() => _context.Books.ToList();
         public BookWithAuthorsVM GetBookId(int bookId)
         {
-            var _bookWithAuthors = _context.Books.Where(n => n.Id == bookId).Select(book => new BookWithAuthorsVM()
+            var bookWithAuthors = _context.Books.Where(n => n.Id == bookId).Select(book => new BookWithAuthorsVM()
             {
                 Title = book.Title,
                 Description = book.Description,
@@ -53,8 +53,12 @@ namespace MyBooks.Data.Services
                 PublisherName = book.Publisher.Name,
                 AuthorNames = book.Book_Authors.Select(n => n.Author.FullName).ToList()
             }).FirstOrDefault();
+            if (bookWithAuthors == null)
+            {
+                return new BookWithAuthorsVM();
+            }
 
-            return _bookWithAuthors;
+            return bookWithAuthors;
         }
         public Book UpdateBookById(int bookId, BookVM book)
         {
@@ -69,6 +73,10 @@ namespace MyBooks.Data.Services
                 _book.Genre = book.Genre;
 
                 _context.SaveChanges();
+            }
+            else
+            {
+                return new Book();
             }
             return _book;
         }

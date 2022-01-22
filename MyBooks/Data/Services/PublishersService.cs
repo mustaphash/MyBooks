@@ -22,7 +22,7 @@ namespace MyBooks.Data.Services
 
         public PublisherWithBooksAndAuthorsVM GetPublisherData(int publisherId)
         {
-            var _publisher = _context.Publishers.Where(p => p.Id == publisherId).Select(p => new PublisherWithBooksAndAuthorsVM()
+            var publisher = _context.Publishers.Where(p => p.Id == publisherId).Select(p => new PublisherWithBooksAndAuthorsVM()
             {
                 Name = p.Name,
                 BookAuthors = p.Books.Select(n => new BookAuthorVM()
@@ -31,16 +31,20 @@ namespace MyBooks.Data.Services
                     BookAuthor = n.Book_Authors.Select(n => n.Author.FullName).ToList()
                 }).ToList(),
             }).FirstOrDefault();
+            if (publisher == null)
+            {
+                return new PublisherWithBooksAndAuthorsVM();
+            }
 
-            return _publisher;
+            return publisher;
         }
 
         public void DeletePublisherById(int id)
         {
-            var _publisher = _context.Publishers.FirstOrDefault(p => p.Id == id);
-            if (_publisher != null)
+            var publisher = _context.Publishers.FirstOrDefault(p => p.Id == id);
+            if (publisher != null)
             {
-                _context.Publishers.Remove(_publisher);
+                _context.Publishers.Remove(publisher);
                 _context.SaveChanges();
             }
         }
